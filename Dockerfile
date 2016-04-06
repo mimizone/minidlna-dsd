@@ -7,6 +7,19 @@ RUN apt-get update && apt-get install -y \
 	build-essential \
 	curl \
 	gettext \
+	libavcodec54 \
+	libavformat54 \
+	libavutil52 \
+	libexif12 \
+	libflac8 \
+	libid3tag0 \
+	libjpeg8 \
+	libjpeg-turbo8 \
+	libogg0 \
+	libsqlite3-0 \
+	libvorbis0a \
+	libvorbisenc2 \
+	libvorbisfile3 \
 	libavcodec-dev \
 	libavformat-dev \
 	libavutil-dev \
@@ -25,10 +38,27 @@ RUN curl -o minidlna.zip https://sourceforge.net/code-snapshots/git/u/u/u/takesh
 
 RUN cd `ls -d u-takeshich-minidlna*` \
 	&& ./autogen.sh \
-	&& ./configure \
+	&& ./configure  \
 	&& make \
 	&& make install 
 RUN rm -rf `ls -d u-takeshich-minidlna*`
+
+RUN apt-get remove -y \
+        autoconf \
+        autopoint \
+        build-essential \
+        curl \
+        libavcodec-dev \
+        libavformat-dev \
+        libavutil-dev \
+        libexif-dev \
+        libflac-dev \
+        libid3tag0-dev \
+        libjpeg-dev \
+        libogg-dev \
+        libsqlite3-dev \
+        libvorbis-dev \
+        unzip 
 
 
 RUN mkdir -p /media/files
